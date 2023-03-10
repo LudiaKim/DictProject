@@ -18,10 +18,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -29,28 +27,24 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
-import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 
-import Menu.ComboSearch;
-import Menu.WordAllShow;
 import Menu.WordInsert;
+import univ.inu.embedded.TestWithGUI;
 
 public class DicMain extends JDialog {
-	private static JTable table;
-	private static JLabel lblISBN;
 	private JTextField tfSearch;
 	private final int typeAdd = 1;
 	private final int typeRemove = 2;
 	private final int typeModify = 3;
 	private final int typeSelect = 4;
-	private JTable table_1;
+	private static JTable table_1;
+	private static JLabel lblSelectWord;
 	
 	/**
 	 * Launch the application.
@@ -109,15 +103,15 @@ public class DicMain extends JDialog {
 			}
 		});
 		
-		JMenuItem mnuAllKWordShow = new JMenuItem("\uC804\uCCB4 \uB2E8\uC5B4\uBCF4\uAE30...");
-		mnuAllKWordShow.addActionListener(new ActionListener() {
+		JMenuItem mnuWordGame = new JMenuItem("\uAC8C\uC784\uD558\uAE30");
+		mnuWordGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				WordAllShow wordAllShow = new WordAllShow();
-				wordAllShow.setModal(true);
-				wordAllShow.setVisible(true);
+				TestWithGUI testWithGUI = new TestWithGUI();
+				testWithGUI.setModal(true);
+				testWithGUI.setVisible(true);
 			}
 		});
-		mnuKor.add(mnuAllKWordShow);
+		mnuKor.add(mnuWordGame);
 		
 		mnuKor.addSeparator();
 		mnuKWordAdd.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
@@ -180,7 +174,9 @@ public class DicMain extends JDialog {
 		JMenuItem mnuHelp2 = new JMenuItem("Help...");
 		mnuHelp2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				DicHelp dicHelp = new DicHelp();
+				dicHelp.setModal(true);
+				dicHelp.setVisible(true);
 			}
 		});
 		mnuHelp2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
@@ -240,29 +236,19 @@ public class DicMain extends JDialog {
 		
 		
 		JMenuItem mnBookBorrow = new JMenuItem("수정");
-		/*mnBookBorrow.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK));
+		mnBookBorrow.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK));
 		mnBookBorrow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				WinInputID winInputID = new WinInputID();
-				winInputID.setModal(true);
-				winInputID.setVisible(true);
-				
-				String sID = winInputID.getID();
-				String sISBN = table.getValueAt(table.getSelectedRow(), 0).toString();
-				
-				insertList(sID, sISBN);				
+						
 			}
 		});
-		popupMenu.add(mnBookBorrow);*/
+		//popupMenu.add(mnBookBorrow);
 		
 		/*JMenuItem mnBookReturn = new JMenuItem("삭제");
 		mnBookReturn.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_DOWN_MASK));
 		mnBookReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DicDelete dicDelete = 
-						new DicDelete(table.getValueAt(table.getSelectedRow(), 0).toString());
-				dicDelete.setModal(true);
-				dicDelete.setVisible(true);
+				
 			}
 		});
 		popupMenu.add(mnBookReturn);
@@ -277,7 +263,7 @@ public class DicMain extends JDialog {
 		panel.add(progressBar);*/
 		
 		
-		JLabel lblSelectWord = new JLabel("\uD604\uC7AC \uC120\uD0DD\uD55C \uB2E8\uC5B4 :");
+		lblSelectWord = new JLabel("\uD604\uC7AC \uC120\uD0DD\uD55C \uB2E8\uC5B4 :");
 		panel.add(lblSelectWord);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -414,7 +400,9 @@ public class DicMain extends JDialog {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				if(e.getClickCount() == 1) {
+					lblSelectWord.setText("현재 선택한 단어: " + table_1.getValueAt(table_1.getSelectedRow(), 0).toString() );
+				}
 			}
 		});
 	}
