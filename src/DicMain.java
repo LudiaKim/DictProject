@@ -1,10 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -28,7 +29,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -37,7 +37,6 @@ import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
 import Menu.WordInsert;
-import bookManager.WinBookUpdate;
 
 public class DicMain extends JDialog {
 	private JTextField tfSearch;
@@ -210,7 +209,23 @@ public class DicMain extends JDialog {
 				}
 			}
 		});
-		tfSearch.setText("단어입력");
+		
+		tfSearch.addFocusListener(new FocusListener() {
+		    @Override
+		    public void focusGained(FocusEvent e) {
+		        // 텍스트 필드를 클릭하면 기본 텍스트가 사라지도록 설정
+		    	tfSearch.setText("");
+		    }
+
+		    @Override
+		    public void focusLost(FocusEvent e) {
+		        // 텍스트 필드가 포커스를 잃으면 기본 텍스트를 다시 설정
+		        if (tfSearch.getText().equals("")) {
+		        	tfSearch.setText("검색할 단어를 입력하세요");
+		        }
+		    }
+		});
+		tfSearch.setText("검색할 단어를 입력하세요");
 		tfSearch.setFont(new Font("굴림", Font.BOLD, 20));
 		toolBar.add(tfSearch);
 		tfSearch.setColumns(10);
@@ -267,48 +282,44 @@ public class DicMain extends JDialog {
 		
 		/*// 컬럼의 너비 정하기
         
-	     // 0번째 컬럼의 속성 셋팅
+	      //0번째 컬럼의 속성 셋팅
 		 table_1.getColumnModel().getColumn(0).setMaxWidth(200);
 	     table_1.getColumnModel().getColumn(0).setMinWidth(150);
 	     table_1.getColumnModel().getColumn(0).setWidth(150);
 	     // 1번째 ..... 이런식으로 하면 되겠죠...
 	     table_1.getColumnModel().getColumn(1).setMaxWidth(500);
 	     table_1.getColumnModel().getColumn(1).setMinWidth(300);
-	     table_1.getColumnModel().getColumn(1).setWidth(300);*/
-	     
-	     
+	     table_1.getColumnModel().getColumn(1).setWidth(300);
+	     */
+	     	     
 		
 		JPopupMenu popupMenu = new JPopupMenu();
 		addPopup(table_1, popupMenu);
 		
 		JMenuItem mnAddWord = new JMenuItem("\uB2E8\uC5B4\uCD94\uAC00");
-		mnAddWord.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
 		popupMenu.add(mnAddWord);
 		
 		JMenuItem mnRemoveWord = new JMenuItem("\uB2E8\uC5B4\uC0AD\uC81C");
-		mnRemoveWord.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK));
 		popupMenu.add(mnRemoveWord);
-		/*mnAddWord.addActionListener(new ActionListener() {
+		
+		
+		mnAddWord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String sWord = 
-				String sMean =		
+				WordInsert wordInsert = new WordInsert();
+				wordInsert.setModal(true);
+				wordInsert.setVisible(true);
 				
-				insertList(sWord, sMean);
+		
 			}
-		});*/
+		});
 		
 		showTable();
 		
 
 		 //JTable table = new JTable();
           
-	     
-		 
-		
 	}
 	
-	
-
 
 	protected void pushEnter() {
 		// TODO Auto-generated method stub
