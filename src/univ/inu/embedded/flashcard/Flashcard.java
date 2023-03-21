@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
  
-public class Flashcard extends JFrame{
+public class Flashcard extends JDialog{
     JButton chkBtn=new JButton("check");
     JButton nextBtn=new JButton("next");
     JPanel p1=new JPanel();
@@ -15,7 +15,7 @@ public class Flashcard extends JFrame{
     JPanel p3=new JPanel();
     JLabel l1=new JLabel(" 영어단어");
     JLabel l2=new JLabel("우리말 뜻");
-JLabel l3=new JLabel(" 0 %");
+    JLabel l3=new JLabel(" 0 %");
     JTextField engField=new JTextField(20);
     JTextField korField=new JTextField(20);
     MyDictionary myDictionary=new MyDictionary();
@@ -25,10 +25,10 @@ JLabel l3=new JLabel(" 0 %");
     int wrong=0;
     int r=70,g=170,b=70;
     float totalQ=0;
-    public Flashcard(MyDictionary newmd){
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public Flashcard(){
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         c.setLayout(new FlowLayout());
-        myDictionary=newmd;
+        myDictionary=new MyDictionary();
         curCard=myDictionary.getRandomCard();
         engField.setText(curCard.getEngWord());
         engField.setEditable(false);

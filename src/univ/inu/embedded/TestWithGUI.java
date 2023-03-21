@@ -1,10 +1,9 @@
 package univ.inu.embedded;
 import univ.incheon.embedded.EngKoreanCard;
 import univ.incheon.embedded.MyDictionary;
-import univ.inu.embedded.flashcard.Flashcard;
+
 public class TestWithGUI {
-	
-    public static void main(String [] args)
+    public static void main (String [] args)
     {
         MyDictionary md=new MyDictionary();
         EngKoreanCard b=new EngKoreanCard("banana");
@@ -24,8 +23,7 @@ public class TestWithGUI {
         md.addCard(m);
         md.addCard(k);
         
-        Flashcard fc=new Flashcard(md);
-        fc.setTitle("\uC601\uC5B4 \uB2E8\uC5B4 \uB9DE\uCD94\uAE30 \uAC8C\uC784");
+        SelectedFlashcard sfc=new SelectedFlashcard(md);
     }
-
 }
+ 

@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -35,7 +37,7 @@ import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
 import Menu.WordInsert;
-import univ.inu.embedded.TestWithGUI;
+import bookManager.WinBookUpdate;
 
 public class DicMain extends JDialog {
 	private JTextField tfSearch;
@@ -106,9 +108,9 @@ public class DicMain extends JDialog {
 		JMenuItem mnuWordGame = new JMenuItem("\uAC8C\uC784\uD558\uAE30");
 		mnuWordGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TestWithGUI testWithGUI = new TestWithGUI();
-				testWithGUI.setModal(true);
-				testWithGUI.setVisible(true);
+				Flashcard1 flashcard = new Flashcard1();
+				flashcard.setModal(true);
+				flashcard.setVisible(true);
 			}
 		});
 		mnuKor.add(mnuWordGame);
@@ -242,17 +244,7 @@ public class DicMain extends JDialog {
 						
 			}
 		});
-		//popupMenu.add(mnBookBorrow);
 		
-		/*JMenuItem mnBookReturn = new JMenuItem("삭제");
-		mnBookReturn.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_DOWN_MASK));
-		mnBookReturn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		popupMenu.add(mnBookReturn);
-		scrollPane.setViewportView(table);
 		
 		/*JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.SOUTH);
@@ -271,27 +263,47 @@ public class DicMain extends JDialog {
 		
 		table_1 = new JTable();
 		scrollPane.setViewportView(table_1);
+	
+		
+		/*// 컬럼의 너비 정하기
+        
+	     // 0번째 컬럼의 속성 셋팅
+		 table_1.getColumnModel().getColumn(0).setMaxWidth(200);
+	     table_1.getColumnModel().getColumn(0).setMinWidth(150);
+	     table_1.getColumnModel().getColumn(0).setWidth(150);
+	     // 1번째 ..... 이런식으로 하면 되겠죠...
+	     table_1.getColumnModel().getColumn(1).setMaxWidth(500);
+	     table_1.getColumnModel().getColumn(1).setMinWidth(300);
+	     table_1.getColumnModel().getColumn(1).setWidth(300);*/
+	     
+	     
 		
 		JPopupMenu popupMenu = new JPopupMenu();
 		addPopup(table_1, popupMenu);
 		
+		JMenuItem mnAddWord = new JMenuItem("\uB2E8\uC5B4\uCD94\uAC00");
+		mnAddWord.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
+		popupMenu.add(mnAddWord);
+		
+		JMenuItem mnRemoveWord = new JMenuItem("\uB2E8\uC5B4\uC0AD\uC81C");
+		mnRemoveWord.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK));
+		popupMenu.add(mnRemoveWord);
+		/*mnAddWord.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String sWord = 
+				String sMean =		
+				
+				insertList(sWord, sMean);
+			}
+		});*/
 		
 		showTable();
-	
-		/*
-		 JTable table = new JTable();
+		
+
+		 //JTable table = new JTable();
           
-	     // 컬럼의 너비 정하기
-	                  
-	     // 0번째 컬럼의 속성 셋팅
-	     table.getColumnModel().getColumn(0).setMaxWidth(400);
-	     table.getColumnModel().getColumn(0).setMinWidth(400);
-	     table.getColumnModel().getColumn(0).setWidth(400);
-	     // 1번째 ..... 이런식으로 하면 되겠죠...
-	     table.getColumnModel().getColumn(1).setMaxWidth(400);
-	     table.getColumnModel().getColumn(1).setMinWidth(400);
-	     table.getColumnModel().getColumn(1).setWidth(400);
-		 */
+	     
+		 
 		
 	}
 	
