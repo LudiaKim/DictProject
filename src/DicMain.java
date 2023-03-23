@@ -88,6 +88,12 @@ public class DicMain extends JDialog {
 		JMenuItem mnuExit = new JMenuItem("종료(X)");
 		mnuExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.ALT_DOWN_MASK));
 		mnuExit.setMnemonic('X');
+		mnuExit.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        System.exit(0); // 종료 코드
+		    }
+		});
 		mnuFile.add(mnuExit);
 		
 		JMenu mnuKor = new JMenu("\uAD6D\uC5B4\uC0AC\uC804(K)");
@@ -224,10 +230,13 @@ public class DicMain extends JDialog {
 		        	tfSearch.setText("검색할 단어를 입력하세요");
 		        }
 		    }
+		    
 		});
 		tfSearch.setText("검색할 단어를 입력하세요");
 		tfSearch.setFont(new Font("굴림", Font.BOLD, 20));
 		toolBar.add(tfSearch);
+		
+
 		tfSearch.setColumns(10);
 		
 		JButton btnEnter = new JButton("\uC785\uB825");
@@ -319,7 +328,7 @@ public class DicMain extends JDialog {
 		 //JTable table = new JTable();
           
 	}
-	
+		
 
 	protected void pushEnter() {
 		// TODO Auto-generated method stub
@@ -360,14 +369,11 @@ public class DicMain extends JDialog {
 			System.out.println("DB 연결 오류");
 		} 
 		
-	}
-
-	/*public WinMain(DefaultTableModel dtm) {
-		// TODO Auto-generated constructor stub
-		this();
-		table.setModel(dtm);
+	}   	/*public WinMain(DefaultTableModel dtm) {
+	// TODO Auto-generated constructor stub
+	this();
+	table.setModel(dtm);
 	}*/
-
 	private void showTable() {	
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -400,7 +406,6 @@ public class DicMain extends JDialog {
 			System.out.println("DB 연결 오류");
 		} 
 	}
-
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -429,4 +434,4 @@ public class DicMain extends JDialog {
 			}
 		});
 	}
-}
+	}
